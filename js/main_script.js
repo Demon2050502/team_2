@@ -420,20 +420,20 @@ document.addEventListener("click", function (event) {
   }
 });
 
-  function addToCart(productId) {
-    const product = productsData.find((p) => p.id === productId);
-    if (!product) return;
+function addToCart(productId) {
+  const product = productsData.find((p) => p.id === productId);
+  if (!product) return;
 
-    let cartItem = cart.find((item) => item.id === productId);
-    if (cartItem) {
-      cartItem.quantity += 1;
-    } else {
-      cart.push({ ...product, quantity: 1 });
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`Товар "${product.name}" добавлен в корзину!`);
+  let cartItem = cart.find((item) => item.id === productId);
+  if (cartItem) {
+    cartItem.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
   }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(`Товар "${product.name}" добавлен в корзину!`);
+}
 
 function searchProducts() {
   let input = document.getElementById("searchInput").value.toLowerCase();
@@ -445,23 +445,36 @@ function searchProducts() {
   );
 
   filteredProducts.forEach((product) => {
+    const isFavorite = favorites.includes(product.name);
     const card = document.createElement("div");
     card.classList.add("card");
 
-    const img = document.createElement("img");
-    img.src = product.image;
-    img.alt = product.name;
+    // Вставляем HTML-структуру с использованием шаблонной строки
+    card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="product-image">
+        <h3>${product.name}</h3>
+        <div class="category">${product.category}</div>
+        <p id="description">${product.description}</p>
+        <p class="price">${formatPrice(product.price)}</p>
+        <div class="actions">
+            <button class="open-reviews" onclick="openModal(${product.id})">
+              <img src="imgs/svg/svg_review.svg">
+            </button>
+            <button class="add-to-cart" onclick="addToCart(${
+              product.id
+            })">В корзину</button>
+            <button class="add-to-favorite" onclick="toggleFavorite(${
+              product.id
+            })">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${
+                  isFavorite ? "red" : "none"
+                }" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
+                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 20.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                </svg>
+            </button>
+        </div>
+    `;
 
-    const title = document.createElement("p");
-    title.textContent = product.name;
-
-    const button = document.createElement("button");
-    button.textContent = "Обзор";
-    button.onclick = () => openModal(product);
-
-    card.appendChild(img);
-    card.appendChild(title);
-    card.appendChild(button);
     productsContainer.appendChild(card);
   });
 }
