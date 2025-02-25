@@ -1,62 +1,76 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Магазин</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
     <header>
-        <div class="header-div">
-            <img src="imgs/logo.png" alt="">
-            <h1>Чемпионы</h1>
-        </div>
-        <nav>
-            <a href="#">Главная</a>
-            <a href="#">О нас</a>
-            <a href="#">Контакты</a>
-        </nav>
+      <div class="header-div">
+        <img src="imgs/logo.png" alt="" />
+        <h1>Чемпионы</h1>
+      </div>
+      <nav>
+        <a href="#">Главная</a>
+        <a href="basket.html">Корзина</a>
+        <a href="favorite.html">Избранное</a>
+      </nav>
     </header>
 
     <main>
-        <aside>
-            <button onclick="changeCategory('laptops')">Ноутбуки</button>
-            <button onclick="changeCategory('tablets')">Планшеты</button>
-            <button onclick="changeCategory('phones')">Телефоны</button>
-        </aside>
+      <aside>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Поиск товаров..."
+          oninput="searchProducts()"
+        />
 
-        <section id="products">
-            <!-- Карточки товаров -->
-        </section>
+        <select id="categorySelect" onchange="changeCategory(this.value)">
+          <option value="all">Все</option>
+          <option value="men">Мужское</option>
+          <option value="women">Женское</option>
+        </select>
+
+        <button onclick="changeCategory('computers')">Компьютеры</button>
+        <button onclick="changeCategory('laptops')">Ноутбуки</button>
+        <button onclick="changeCategory('tablets')">Планшеты</button>
+        <button onclick="changeCategory('phones')">Телефоны</button>
+      </aside>
+
+      <section id="products">
+        <!-- Карточки товаров -->
+      </section>
     </main>
 
     <footer>
+      <div>
         <div>
-            <div>
-                <h3>Адрес</h3>
-                <p>Улица Пушкина, дом Колотушкина, Квартира Петрова</p>
-            </div>
-    
-            <div>
-                <h3>Телефон</h3>
-                <p>+7(777)777-77-77</p>
-            </div>
+          <h3>Адрес</h3>
+          <p>Улица Пушкина, дом Колотушкина, Квартира Петрова</p>
         </div>
 
-        <p>&copy; 2025 Чемпионы. Все права защищены.</p>
+        <div>
+          <h3>Телефон</h3>
+          <p>+7(777)777-77-77</p>
+        </div>
+      </div>
+
+      <p>&copy; 2025 Чемпионы. Все права защищены.</p>
     </footer>
 
     <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title"></h2>
-            <p id="modal-description"></p>
-            <p id="modal-price"></p>
-            <button onclick="addToCart()">Добавить в корзину</button>
-        </div>
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modal-title"></h2>
+        <p id="modal-description"></p>
+        <p id="modal-price"></p>
+        <button onclick="addToCart()">Добавить в корзину</button>
+      </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <script src="js/main_script.js"></script>
+  </body>
 </html>
