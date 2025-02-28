@@ -30,18 +30,115 @@
 
         <select id="categorySelect" onchange="changeCategory(this.value)">
           <option value="all">Все</option>
-          <option value="men">Мужское</option>
-          <option value="women">Женское</option>
+          <option value="sec_1">Секция 1</option>
+          <option value="sec_2">Секция 2</option>
         </select>
 
         <button onclick="changeCategory('computers')">Компьютеры</button>
         <button onclick="changeCategory('laptops')">Ноутбуки</button>
         <button onclick="changeCategory('tablets')">Планшеты</button>
         <button onclick="changeCategory('phones')">Телефоны</button>
+
+        <div>
+          <h3>Сортировка</h3>
+          <button onclick="sortProducts('price', 'asc')">
+            По цене (возр.)
+          </button>
+          <button onclick="sortProducts('price', 'desc')">
+            По цене (убыв.)
+          </button>
+          <button onclick="sortProducts('name', 'asc')">
+            По названию (А-Я)
+          </button>
+          <button onclick="sortProducts('name', 'desc')">
+            По названию (Я-А)
+          </button>
+        </div>
+
+        <div>
+          <h3>Фильтр по категориям</h3>
+          <label
+            ><input
+              type="checkbox"
+              name="category"
+              value="computers"
+              onchange="filterByMultipleCategories()"
+            />
+            Компьютеры</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="category"
+              value="laptops"
+              onchange="filterByMultipleCategories()"
+            />
+            Ноутбуки</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="category"
+              value="tablets"
+              onchange="filterByMultipleCategories()"
+            />
+            Планшеты</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="category"
+              value="phones"
+              onchange="filterByMultipleCategories()"
+            />
+            Телефоны</label
+          >
+        </div>
+
+        <div>
+          <h3>Специальные предложения</h3>
+          <label
+            ><input
+              type="checkbox"
+              name="special"
+              value="discount"
+              onchange="filterBySpecialOffers()"
+            />
+            Скидки</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="special"
+              value="new"
+              onchange="filterBySpecialOffers()"
+            />
+            Новинки</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="special"
+              value="bestSeller"
+              onchange="filterBySpecialOffers()"
+            />
+            Хиты продаж</label
+          >
+        </div>
       </aside>
 
-      <section id="products">
-        <!-- Карточки товаров -->
+      <section>
+        <div id="products">
+          <!-- Карточки товаров -->
+        </div>
+
+        <div class="pagination">
+          <button id="firstPage">&lt;&lt;</button>
+          <button id="prevPage">&lt;</button>
+          <span id="currentPage">1</span>
+          <button id="nextPage">&gt;</button>
+          <button id="lastPage">&gt;&gt;</button>
+        </div>
       </section>
     </main>
 
@@ -67,7 +164,6 @@
         <h2 id="modal-title"></h2>
         <p id="modal-description"></p>
         <p id="modal-price"></p>
-        <button onclick="addToCart()">Добавить в корзину</button>
       </div>
     </div>
 
